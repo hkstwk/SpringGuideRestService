@@ -1,4 +1,4 @@
-package nl.hkstwk.spring.SpringGuidePayrollRestService;
+package nl.hkstwk.spring.rest_service;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

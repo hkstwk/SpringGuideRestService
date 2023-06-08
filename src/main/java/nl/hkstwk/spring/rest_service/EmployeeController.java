@@ -1,4 +1,4 @@
-package nl.hkstwk.spring.SpringGuidePayrollRestService;
+package nl.hkstwk.spring.rest_service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,8 +37,8 @@ public class EmployeeController {
     // end::get-aggregate-root[]
 
     @PostMapping("/employees")
-    Employee newEmployee(@RequestBody Employee newEmployee) {
-        return repository.save(newEmployee);
+    EntityModel<Employee> newEmployee(@RequestBody Employee newEmployee) {
+        return assembler.toModel(repository.save(newEmployee));
     }
 
     // Single item
@@ -51,17 +51,17 @@ public class EmployeeController {
     }
 
     @PutMapping("/employees/{id}")
-    Employee replaceEmployee(@RequestBody Employee newEmployee, @PathVariable Long id) {
+    EntityModel<Employee> replaceEmployee(@RequestBody Employee newEmployee, @PathVariable Long id) {
 
         return repository.findById(id)
                 .map(employee -> {
                     employee.setName(newEmployee.getName());
                     employee.setRole(newEmployee.getRole());
-                    return repository.save(employee);
+                    return assembler.toModel(repository.save(employee));
                 })
                 .orElseGet(() -> {
                     newEmployee.setId(id);
-                    return repository.save(newEmployee);
+                    return assembler.toModel(repository.save(newEmployee));
                 });
     }
 
