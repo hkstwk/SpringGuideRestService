@@ -39,12 +39,13 @@ public class OrderController {
     }
 
     @GetMapping("/orders/{id}")
-    EntityModel<Order> one(@PathVariable Long id) {
+    Order one(@PathVariable Long id) {
 
         Order order = orderRepository.findById(id) //
                 .orElseThrow(() -> new OrderNotFoundException(id));
 
-        return assembler.toModel(order);
+//        return assembler.toModel(order);
+        return order;
     }
 
     @PostMapping("/orders")
