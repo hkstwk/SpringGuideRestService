@@ -1,7 +1,0 @@
-package nl.hkstwk.spring;
-
-public class Main {
-    public static void main(String[] args) {
-        System.out.println("Hello world, let's start making few changes!");
-    }
-}
